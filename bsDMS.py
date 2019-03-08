@@ -122,13 +122,13 @@ class MyFrame(wx.Frame):
         self.SetMenuBar(self.topMenuBar)
         
     def __setVariables(self):
-        self.Version='1.3.0'
-        self.rootPath=os.path.split(sys.argv[0])[0]
-        self.relativeStorage='DocArchive'
-        self.storagePath=os.path.join(self.rootPath,self.relativeStorage)
-        self.dbFile=os.path.join(self.rootPath,'.DMSSQLdb')
-        self.downloadDefault=os.path.expanduser('~\\My Documents')
-        self.uploadDefault=os.path.expanduser('~\\My Documents')
+        self.Version         = '1.3.0'
+        self.rootPath        = sys.path[0] #os.path.split(sys.argv[0])[0]
+        self.relativeStorage = 'DocArchive'
+        self.storagePath     = os.path.join(self.rootPath, self.relativeStorage)
+        self.dbFile          = os.path.join(self.rootPath, '.DMSSQLdb')
+        self.downloadDefault = os.path.expanduser('~\\My Documents')
+        self.uploadDefault   = os.path.expanduser('~\\My Documents')
 
         self.SQLMod=DMS.SQLMod(self.dbFile)
         self.preFilterTags=[]
@@ -137,7 +137,7 @@ class MyFrame(wx.Frame):
         
     def __set_properties(self):
         # begin wxGlade: MyFrame.__set_properties
-        self.SetTitle("betascheme Document Managment System")
+        self.SetTitle("betaScheme Document Managment System")
         # end wxGlade
 
     def __do_layout(self):
@@ -243,15 +243,15 @@ class MyFrame(wx.Frame):
         event.Skip()
         
     def onUpload(self, event):
-        returnDict,self.uploadDefault = DMS.uploadFile(self,self.storagePath,self.relativeStorage,self.uploadDefault)
+        returnDict, self.uploadDefault = DMS.uploadFile(self, self.storagePath, self.relativeStorage, self.uploadDefault)
         if returnDict: 
-            returnDict['tags']=self.preFilterTags
+            returnDict['tags'] = self.preFilterTags
             self.SQLMod.replaceInsert(returnDict)
             self.updateValues(returnDict['name'])
 
     def onDownload(self, event): # wxGlade: MyFrame.<event_handler>
-        link=self.SQLMod.fetchLink(self.nameBox.GetValue())
-        self.downloadDefault=DMS.downloadFile(self,os.path.join(self.rootPath,link),self.downloadDefault)
+        link = self.SQLMod.fetchLink(self.nameBox.GetValue())
+        self.downloadDefault=DMS.downloadFile(self, os.path.join(self.rootPath, link), self.downloadDefault)
 
     def onOpen(self, event): # wxGlade: MyFrame.<event_handler>
         link=self.SQLMod.fetchLink(self.nameBox.GetValue())

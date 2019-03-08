@@ -148,7 +148,7 @@ def underConstruction(parent):
     myDialogs.ConstructionDialog(parent)
             
 def showAbout(vers):
-    name='betascheme Document Management System'
+    name='betaScheme Document Management System'
     version=vers
     copyright='GPL 3.0'
     desc='An internal DMS built on Python and SQLite3'
@@ -235,7 +235,7 @@ def uploadFile(parent,savePath,relPath,uDir):
     # BAD things can happen otherwise!
     dlg.Destroy()
     try:
-        return fileCopy(paths,savePath,relPath), newDefault
+        return fileCopy(paths, savePath, relPath), newDefault
     except UnboundLocalError:
         return False, newDefault
         
